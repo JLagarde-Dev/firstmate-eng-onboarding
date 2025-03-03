@@ -26,3 +26,7 @@ def edit_user_data(db: Session, user_id: int, user: UserEdit):
     db.commit()
     db.refresh(db_user)
     return db_user
+
+def get_all_users(db: Session, present: bool | None):
+    db_user = db.query(User).filter(User.present == present if present is not None else True).all()
+    return db_user
