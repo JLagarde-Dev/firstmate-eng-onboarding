@@ -30,3 +30,10 @@ def edit_user_data(db: Session, user_id: int, user: UserEdit):
 def get_all_users(db: Session, present: bool | None):
     db_user = db.query(User).filter(User.present == present if present is not None else True).all()
     return db_user
+
+def delete_user_by_id(db: Session, user_id: int):
+    db_user = db.query(User).filter(User.id == user_id).first()
+    db.delete(db_user)
+    db.commit()
+
+
